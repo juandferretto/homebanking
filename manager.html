@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homebanking</title>
+    <link rel="stylesheet" href="./style/manager.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="app" class="d-flex flex-column align-items-center">
+        <div class="d-flex flex-column align-items-center mt-2 mb-2">
+            <h2 class="text-decoration-underline">Client Manager</h2>
+            <form class="d-flex flex-column gap-2" @submit.prevent="postClient">
+                <label for="first_name">First Name:</label>
+                <input v-model="firstName" type="text" name="first_name" id="first_name" required>
+                <label for="last_name">Last Name:</label>
+                <input v-model="lastName" type="text" name="last_name" id="last_name" required>
+                <label for="email">Email:</label>
+                <input v-model="email" type="email" name="email" id="email" required>
+                <button type="submit" class="btn-success">Add Client</button>
+            </form>
+        </div>
+        <div id="table">
+            <h2>Client List</h2>
+            <table class="table table-hover text-center">
+                <thead class="bg-secondary">
+                    <tr>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>Email</td>
+                        <td>Delete</td>
+                    </tr>
+                </thead>
+                <tbody v-for="client in clients">
+                    <tr>
+                        <td>{{client.firstName}}</td>
+                        <td>{{client.lastName}}</td>
+                        <td>{{client.email}}</td>
+                        <td><span @click="deleteClient(client)" id="cross">❎</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h2 class="bg-secondary text-center p-1">Client REST Response</h2>
+            <pre><code>{{clients}}</code></pre>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="./js/manager.js"></script>
+</body>
+
+</html>

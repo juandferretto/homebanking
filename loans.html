@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Préstamos</title>
+    <link rel="stylesheet" href="./style/accounts.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
+<body>
+    <div id="app" class="d-flex flex-column justify-content-center align-items-center">
+        <div class="header animate__animated animate__fadeIn">
+            <img class="logo" src="./assets/logo-homebanking.png" />
+            <div class="align-left">
+                <span id="nombre">Melba Morel - Préstamos</span>
+            </div>
+        </div>
+        <div class="white-container gap-3 animate__animated animate__fadeIn">
+            <div class="menu-container">
+                <button class="links"><a class="text-decoration-none" href="accounts.html">Cuenta</a></button>
+                <button class="links"><a class="text-decoration-none" href="#">Pagos</a></button>
+                <h1 class="tu-cuenta">Préstamos</h1>
+                <button class="links"><a class="text-decoration-none" href="#">Inversiones</a></button>
+                <button class="links"><a class="text-decoration-none" href="cards.html">Tarjetas</a></button>
+            </div>
+            <div class="container_accounts">
+                <div v-for="loan in loans" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header">{{loan.name}}</div>
+                    <div class="card-body">
+                        <h5 class="card-title">${{loan.amount}}</h5>
+                        <p class="card-text">Cuotas: {{loan.payments}}</p>
+                        <p>Proxima cuota: ${{(loan.amount / loan.payments).toFixed(2)}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+    <script src="./js/accounts.js"></script>
+</body>
+
+</html>

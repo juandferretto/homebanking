@@ -1,0 +1,265 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#app {
+    min-height: 100vh;
+    background-color: black;
+}
+
+body {
+    margin: 0;
+    font-family: "Source Sans Pro", sans-serif;
+    background-color: #2a333d;
+}
+
+.avatar {
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+
+.logo {
+    display: inline-block;
+    height: 5vh;
+    text-align: left;
+    vertical-align: text-bottom;
+}
+
+.align-left {
+    display: flex;
+    padding: 8px;
+    align-items: center;
+}
+
+.tu-cuenta {
+    padding-left: 24px;
+    margin: 0;
+    margin-left: -30px;
+    font-family: "Source Sans Pro";
+    font-size: 32px;
+    font-weight: normal;
+    color: #2a333d;
+    border-left: 6px solid #66e8ed;
+}
+
+.header {
+    display: flex;
+    width: 55%;
+    margin: 7% auto 0;
+    margin-bottom: 15px;
+    justify-content: space-between;
+}
+
+.cuenta-info {
+    display: block;
+    width: 100%;
+}
+
+#nombre {
+    display: inline-block;
+    margin-right: 10px;
+    overflow: hidden;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    color: #fff;
+}
+
+.links {
+    position: relative;
+    display: block;
+    padding: 0;
+    margin: 20px 0;
+    margin-bottom: 30px;
+    font-family: "Source Sans Pro";
+    font-size: 16px;
+    cursor: pointer;
+    -webkit-transition: all .6s ease-in-out;
+    -moz-transition: all .6s ease-in-out;
+    -o-transition: all .6s ease-in-out;
+    transition: all .6s ease-in-out;
+    text-align: left;
+    vertical-align: text-bottom;
+    color: #666;
+    border: 0;
+    background-color: transparent;
+}
+
+.links:hover {
+    margin-left: 10px;
+    background-color: #003f82;
+    border-radius: 2px;
+}
+
+.text-decoration-none {
+    color: #666;
+    height: 100%;
+    width: 100%;
+    padding: 2px;
+}
+
+.text-decoration-none:hover {
+    color: white;
+}
+
+.white-container {
+    display: flex;
+    width: 55%;
+    padding: 30px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: 1px solid #979797;
+    border-radius: 8px;
+    background-color: #fff;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.blue-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 50%vw;
+    height: 25vh;
+    box-sizing: border-box;
+    text-align: center;
+    color: white;
+    border-radius: 8px;
+    background-color: #003f82;
+    align-items: center;
+    padding: 10px;
+}
+
+.blue-container:hover {
+    box-shadow: 10px 10px 10px black;
+    cursor: pointer;
+    -webkit-transition: all .6s ease-in-out;
+    -moz-transition: all .6s ease-in-out;
+    -o-transition: all .6s ease-in-out;
+    transition: all .6s ease-in-out;
+    transform: translateX(2em);
+}
+
+#anchor {
+    height: 100%;
+}
+
+.menu-container {
+    display: block;
+    width: 35%;
+    padding-right: 20px;
+}
+
+.cuenta-container {
+    width: 35%;
+}
+
+#saldo-cuenta {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    overflow: hidden;
+    font-size: 2.5rem;
+    text-align: center;
+    text-overflow: ellipsis;
+}
+
+#limite-extraccion {
+    overflow: hidden;
+    font-size: 15px;
+    text-overflow: ellipsis;
+}
+
+#transactions {
+    width: 100%;
+}
+
+#date {
+    margin: 0;
+    font-size: small;
+}
+
+#description {
+    margin: 0;
+    font-size: 20px;
+    font-style: italic;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#return {
+    text-decoration: none;
+    color: white;
+}
+
+.btn-dark {
+    border-radius: 5px;
+}
+
+#type {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: small;
+}
+
+.amount-transaction {
+    margin: 0;
+}
+
+#chip-tarjeta {
+    height: 5vh;
+}
+
+.logo-cards {
+    height: 2vh;
+}
+
+.cardholder {
+    font-size: 8px;
+    margin: 0;
+}
+
+#card-credit-debit {
+    background-color: #000000;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+@media only screen and (max-width: 630px) {
+    .white-container {
+        width: 90%;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+    .blue-container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    #anchor {
+        display: flex;
+        align-items: center;
+    }
+    #saldo-cuenta {
+        font-size: 8.5vw;
+    }
+    .menu-container {
+        width: 100%;
+    }
+    .header {
+        margin-bottom: 10px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .logo {
+        margin-bottom: 10px;
+    }
+    .container_accounts {
+        margin-bottom: 15px;
+    }
+    .amount-transaction {
+        margin-left: 10px;
+    }
+}

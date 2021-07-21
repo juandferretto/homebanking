@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transferencias</title>
+    <link rel="stylesheet" href="./style/accounts.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="shortcut icon" href="/assets/apple-touch-icon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app" class="d-flex flex-column justify-content-center align-items-center">
+        <div class="header animate__animated animate__fadeIn align-items-center">
+            <img class="logo" src="./assets/logo-homebanking.png" />
+            <div class="align-left d-flex gap-2">
+                <span id="nombre" class="fst-italic">Transferencias</span>
+                <button id="btn-cerrar-sesion" @click="cerrarSesion" class="btn-danger">Cerrar sesión</button>
+            </div>
+        </div>
+        <div class="white-container animate__animated animate__fadeIn">
+            <div class="menu-container">
+                <button class="links"><a class="text-decoration-none" href="accounts.html">Cuentas</a></button>
+                <button class="links"><a class="text-decoration-none" href="#">Pagos</a></button>
+                <button class="links"><a class="text-decoration-none" href="loans.html">Préstamos</a></button>
+                <button class="links"><a class="text-decoration-none" href="#">Inversiones</a></button>
+                <button class="links"><a class="text-decoration-none" href="cards.html">Tarjetas</a></button>
+                <h1 class="tu-cuenta">Transferencias</h1>
+            </div>
+            <div class="d-flex flex-column" id="container-transfers-big">
+                <div class="container_accounts ms-4 p-3" id="container-transfers">
+                    <div class="d-flex flex-column align-items-center mt-3">
+                        <span v-if="destCuenta" id="dest-transferencia" class="fst-italic">¿A quién será la transferencia?</span>
+                        <button @click="transferencia1" v-if="cuentaPropia" class="btn-dark mt-2 fst-italic p-1">Cuenta propia</button>
+                        <button @click="transferenciaTerceros" v-if="terceros" class="btn-dark mt-2 fst-italic p-1">Terceros</button>
+                    </div>
+                    <div>
+                        <form @submit.prevent="enviarTransferencia">
+                            <div>
+                                <div v-if="cuentaPropiaIsTrue" class="d-flex flex-column align-items-center">
+                                    <span class="text-center mb-2 fst-italic">Seleccione la cuenta a transferir:</span>
+                                    <span class="text-center mb-2 text-danger warning">⚠️ Recuerde que no puede transferir a la cuenta origen</span>
+                                    <select v-model="cuentaDest" id="accounts-transfers" v-if="cuentaPropiaIsTrue">
+                                        <option v-for="account in accounts">{{account.number}}</option>
+                                    </select>
+                                </div>
+                                <div v-if="tranferenciaATerceros" class="d-flex flex-column">
+                                    <span class="text-center mb-2 fst-italic">Ingrese la cuenta a transferir:</span>
+                                    <span class="text-center mb-2 text-danger warning">⚠️ Recuerde que no puede transferir a la cuenta origen</span>
+                                    <input v-model="cuentaDest" type="text">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex flex-column align-items-center mt-2 mb-2">
+                                <span class="text-center mb-2 fst-italic fw-bolder">Mi cuenta (origen)</span>
+                                <select class="monto" v-model="cuentaOrigen">
+                                    <option v-for="account in accounts">{{account.number}}</option>
+                                </select>
+                            </div>
+                            <hr>
+                            <div class="mt-3">
+                                <div class="d-flex flex-column align-items-center mt-2 mb-2">
+                                    <span class="mb-2 fst-italic fw-bolder">Ingrese el monto</span>
+                                    <input class="monto text-center" v-model="monto" type="number">
+                                </div>
+                                <hr>
+                                <div class="d-flex flex-column align-items-center mt-2 mb-2">
+                                    <span class="mb-2 fst-italic fw-bolder">Descripción</span>
+                                    <input class="text-center" v-model="descripcion" type="text">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-center">
+                                <input class="mt-2 p-1 btn-dark text-center" type="submit" value="Enviar tranferencia">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+    <script src="./js/transfers.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+
+</html>

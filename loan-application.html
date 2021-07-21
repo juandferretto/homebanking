@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar préstamo</title>
+    <link rel="stylesheet" href="./style/accounts.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="shortcut icon" href="/assets/apple-touch-icon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app" class="d-flex flex-column justify-content-center align-items-center">
+        <div class="header animate__animated animate__fadeIn align-items-center">
+            <img class="logo" src="./assets/logo-homebanking.png" />
+            <div class="align-left d-flex gap-2">
+                <span id="nombre" class="fst-italic">Solicitud de préstamo</span>
+                <button id="btn-cerrar-sesion" @click="cerrarSesion" class="btn-danger">Cerrar sesión</button>
+            </div>
+        </div>
+        <div class="white-container d-flex justify-content-between animate__animated animate__fadeIn">
+            <div class="div-prestamos">
+                <div v-for="loan in loans" class="card me-sm-2 mb-2 bg-dark" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-light">{{loan.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Monto máximo: ${{loan.maxAmount}}</h6>
+                        <p class="card-text fst-italic text-light">Cuotas disponibles: {{loan.payments}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="div-solicitar-prestamo d-flex flex-column align-items-center">
+                <p class="text-center mt-2">Complete el siguiente formulario de solicitud:</p>
+                <form class="d-flex flex-column gap-3" @submit.prevent="solicitarPrestamo">
+                    <select v-model="loanName" class="inp-tamaño">
+                        <option disabled value="">Seleccione un préstamo</option>
+                        <option v-for="loan in loans">{{loan.name}}</option>
+                    </select>
+                    <p v-if="loanName != '' "
+                        class="p-0 m-0 bg-secondary text-center p-1 text-light animate__animated animate__pulse">Cuotas:
+                    </p>
+                    <select v-model="cuota" v-if="loanName == 'Hipotecario' " class="animate__animated animate__pulse">
+                        <option>12</option>
+                        <option>24</option>
+                        <option>36</option>
+                        <option>48</option>
+                        <option>60</option>
+                    </select>
+                    <select v-model="cuota" v-if="loanName == 'Personal' " class="animate__animated animate__pulse">
+                        <option>6</option>
+                        <option>12</option>
+                        <option>24</option>
+                    </select>
+                    <select v-model="cuota" v-if="loanName == 'Automotriz' " class="animate__animated animate__pulse">
+                        <option>6</option>
+                        <option>12</option>
+                        <option>24</option>
+                        <option>36</option>
+                    </select>
+                    <input v-model="monto" class="inp-tamaño" type="number" placeholder="Monto">
+                    <input v-model="accountDest" class="inp-tamaño" type="text"
+                        placeholder="Cuenta en donde se acreditará">
+                    <p v-if="cuota != 0 && monto != '' ">Cuota mensual (en $): {{porcentajeLoan}}</p>
+                    <div class="d-flex flex-column align-content-center gap-2">
+                        <a class="btn-dark text-center text-decoration-none text-light" href="accounts.html">Volver</a>
+                        <input v-if="cuota != 0 && monto != '' && loanName != '' && accountDest != '' " @click="solicitarPrestamo" class="btn-dark p-1" type="submit" value="Solicitar préstamo">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+    <script src="./js/loan-application.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+
+</html>

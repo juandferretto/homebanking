@@ -10,15 +10,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="shortcut icon" href="/assets/apple-touch-icon.png" type="image/x-icon">
 </head>
 
 <body>
   <div id="app" class="d-flex flex-column justify-content-center align-items-center">
     <div class="header animate__animated animate__fadeIn">
       <img class="logo" src="./assets/logo-homebanking.png" />
-      <div class="align-left">
-        <span id="nombre">Melba Morel - Tarjetas</span>
-      </div>
+      <div class="align-left d-flex gap-2">
+        <span id="nombre" class="fst-italic">Tarjetas</span>
+        <button id="btn-cerrar-sesion" @click="cerrarSesion" class="btn-danger">Cerrar sesión</button>
+    </div>
     </div>
     <div id="white-container-cards" class="white-container animate__animated animate__fadeIn">
       <div class="menu-container">
@@ -27,8 +29,9 @@
         <button class="links"><a class="text-decoration-none" href="loans.html">Préstamos</a></button>
         <button class="links"><a class="text-decoration-none" href="#">Inversiones</a></button>
         <h1 class="tu-cuenta">Tarjetas</h1>
+        <button class="links"><a class="text-decoration-none" href="transfers.html">Transferencias</a></button>
       </div>
-      <div class="container_accounts">
+      <div v-if="cards.length > 0" class="container_accounts d-flex flex-column align-items-center">
         <div v-for="card in cards" class="mt-3 p-3 animate__animated animate__bounce" id="card-credit-debit">
           <div class="d-flex flex-column">
             <div class="d-flex justify-content-around align-items-center">
@@ -40,18 +43,79 @@
             </div>
             <p class="text-light text-center pt-2">{{card.number}}</p>
             <div class="d-flex justify-content-between">
-              <div class="ms-3 text-center">
+              <div class="ms-1 text-center">
                 <p class="cardholder text-light">CARDHOLDER</p>
                 <p class="cardholder text-light">{{card.cardholder}}</p>
               </div>
-              <div class="me-3 text-center">
+              <div class="ms-3 text-center">
                 <p class="cardholder text-light">EXPIRES</p>
                 <p class="cardholder text-light">{{formatDate(card.truDate)}}</p>
               </div>
+              <div class="ms-3 text-center">
+                <p class="cardholder text-light">CVV</p>
+                <p class="cardholder text-light">{{card.cvv}}</p>
+              </div>
             </div>
+            <p class="cardholder mt-2 text-light fst-italic" id="card-color">{{card.color}}</p>
+          </div>
+          <div class="d-flex justify-content-end">
+            <p class="m-0" id="eliminar-tarjeta" @click="eliminarTarjeta(card)">❎</p>
           </div>
         </div>
+        <button v-if="creacionTarjeta" @click="abrirCrearTarjeta" class="btn-success mt-3 p-1">Solicitar
+          tarjeta</button>
+        <div v-if="solicitudTarjeta" class="animate__animated animate__fadeInDown mt-3 animate__bounceOut">
+          <p class="fst-italic">¡Hola!, complete el siguiente formulario:</p>
+          <form action="" @submit.prevent="crearTarjeta" class="d-flex flex-column">
+            <h6 class="mt-2 text-center">Tipo de tarjeta:</h6>
+            <select v-model="tarjetaTipo">
+              <option disabled value="">Seleccione un tipo</option>
+              <option>CREDIT</option>
+              <option>DEBIT</option>
+            </select>
+            <h6 class="mt-2 text-center">Color de tarjeta:</h6 class="mt-2">
+            <select v-model="colorTarjeta">
+              <option disabled value="">Seleccione un color</option>
+              <option>GOLD</option>
+              <option>SILVER</option>
+              <option>TITANIUM</option>
+            </select>
+            <div class="d-flex justify-content-center gap-3 mt-4">
+              <input type="submit" value="Solicitar tarjeta" class="p-1">
+              <button class="btn-danger p-1" @click="cancelarTarjeta">Cancelar</button>
+            </div>
+          </form>
+        </div>
       </div>
+      <div v-else class="container_accounts d-flex flex-column align-items-center mt-3">
+        <h3 class="text-center">No solicitaste ninguna tarjeta.</h3>
+        <h4 class="mt-2 fst-italic">Solicita una:</h4>
+        <button v-if="creacionTarjeta" @click="abrirCrearTarjeta" class="btn-success mt-3 p-1">Solicitar
+          tarjeta</button>
+          <div v-if="solicitudTarjeta" class="animate__animated animate__fadeInDown mt-3 animate__bounceOut">
+            <p class="fst-italic">¡Hola!, complete el siguiente formulario:</p>
+            <form action="" @submit.prevent="crearTarjeta" class="d-flex flex-column">
+              <h6 class="mt-2 text-center">Tipo de tarjeta:</h6>
+              <select v-model="tarjetaTipo">
+                <option disabled value="">Seleccione un tipo</option>
+                <option>CREDIT</option>
+                <option>DEBIT</option>
+              </select>
+              <h6 class="mt-2 text-center">Color de tarjeta:</h6 class="mt-2">
+              <select v-model="colorTarjeta">
+                <option disabled value="">Seleccione un color</option>
+                <option>GOLD</option>
+                <option>SILVER</option>
+                <option>TITANIUM</option>
+              </select>
+              <div class="d-flex justify-content-center gap-3 mt-4">
+                <input type="submit" value="Solicitar tarjeta" class="p-1">
+                <button class="btn-danger p-1" @click="cancelarTarjeta">Cancelar</button>
+              </div>
+            </form>
+          </div>
+      </div>
+
     </div>
   </div>
 

@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="shortcut icon" href="/assets/apple-touch-icon.png" type="image/x-icon">
 </head>
 
 <body>
@@ -29,17 +30,43 @@
                 <button class="links"><a class="text-decoration-none" href="loans.html">Préstamos</a></button>
                 <button class="links"><a class="text-decoration-none" href="#">Inversiones</a></button>
                 <button class="links"><a class="text-decoration-none" href="cards.html">Tarjetas</a></button>
+                <button class="links"><a class="text-decoration-none" href="transfers.html">Transferencias</a></button>
+                <button v-if="nameAdmin == 'Admin' " class="links"><a class="text-decoration-none" href="create-loan.html">Crear préstamo (solo Admin)</a></button>
             </div>
-            <div class="container_accounts">
-                <div v-for="account in client" class="blue-container mt-3">
-                    <a id="anchor" class="text-decoration-none text-light"
-                        :href="'http://localhost:8080/account.html?id=' + account.id">
-                        <div class="cuenta-info">
-                            <p>Saldo en tu cuenta (N°{{account.number}})</p>
-                            <h3 id="saldo-cuenta">${{account.balance}}</h3>
-                        </div>
-                    </a>
+            <div class="d-flex flex-column">
+                <div class="container_accounts">
+                    <div v-for="account in isActive" class="blue-container mt-3">
+                        <a id="anchor" class="text-decoration-none text-light"
+                            :href="'http://localhost:8080/account.html?id=' + account.id">
+                            <div class="cuenta-info">
+                                <p>Saldo en tu cuenta (N° {{account.number}})</p>
+                                <h3 id="saldo-cuenta">${{account.balance}}</h3>
+                            </div>
+                            <p v-if="account.accountType == 'AHORRO'" class="fst-italic">Caja de ahorro</p>
+                            <p v-else class="fst-italic">Cuenta corriente</p>
+                        </a>
+                        <p @click="eliminarCuenta(account)" id="eliminar-cuenta">❎</p>
+                    </div>
                 </div>
+                <div v-if="tipoCuenta" class="d-flex flex-column align-items-center p-2 animate__animated animate__fadeIn mt-2" id="tipo-cuenta">
+                    <form class="d-flex flex-column align-items-center">
+                        <p>Por favor, seleccione el tipo de cuenta:</p>
+                        <div class="d-flex gap-3 mt-1 mb-1">
+                            <select v-model="cuentaTipo">
+                                <option disabled value="">Seleccione un tipo</option>
+                                <option>AHORRO</option>
+                                <option>CORRIENTE</option>
+                            </select>
+                        </div>
+                        <button v-if="crearAccountFinal" class="btn-success mt-3 p-3 crearCuenta" @click="crearLaCuenta">Crear</button>
+                    </form>
+                </div>
+                <button v-if="client.length === 3" class="btn-success mt-3 p-1 crearCuenta" disabled>No puedes crear mas
+                    cuentas</button>
+                <button v-show="crearAccount" v-else class="btn-success mt-3 p-1 crearCuenta" @click="crearCuenta">Crear cuenta</button>
+                <a class="btn-primary mt-3 p-1 crearCuenta text-center" href="loan-application.html">Solicitar
+                    préstamo</a>
+
             </div>
         </div>
     </div>

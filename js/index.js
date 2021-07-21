@@ -8,7 +8,8 @@ const app = Vue.createApp({
       firstName: "",
       lastName: "",
       email_record: "",
-      password_record: ""
+      password_record: "",
+      errorEmail: false
     }
   },
 
@@ -20,7 +21,9 @@ const app = Vue.createApp({
     },
 
     registrarse(){
-      axios.post('/api/clients',"firstName=" + this.firstName + "&lastName=" + this.lastName + "&email=" + this.email_record + "&password=" + this.password_record , { headers:{'content-type':'application/x-www-form-urlencoded'}}).then().then(response => window.location.href="/index.html")
+      axios.post('/api/clients',"firstName=" + this.firstName + "&lastName=" + this.lastName + "&email=" + this.email_record + "&password=" + this.password_record , { headers:{'content-type':'application/x-www-form-urlencoded'}}).then(res => axios.post('/api/login', "email=" + this.email_record + "&password=" + this.password_record, {
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      })).then(res => window.location.href="/accounts.html").catch( err => this.errorEmail = true)
     }
   }
 })

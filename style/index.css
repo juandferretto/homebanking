@@ -232,7 +232,7 @@ form.sign-in-form {
   transform: translateX(800px);
 }
 
-#error-password{
+.error-password{
   color: red;
 }
 

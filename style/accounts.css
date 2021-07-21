@@ -131,16 +131,6 @@ body {
     padding: 10px;
 }
 
-.blue-container:hover {
-    box-shadow: 10px 10px 10px black;
-    cursor: pointer;
-    -webkit-transition: all .6s ease-in-out;
-    -moz-transition: all .6s ease-in-out;
-    -o-transition: all .6s ease-in-out;
-    transition: all .6s ease-in-out;
-    transform: translateX(2em);
-}
-
 #anchor {
     height: 100%;
 }
@@ -225,6 +215,84 @@ body {
     border-radius: 5px;
 }
 
+#card-color {
+    font-size: 10px;
+}
+
+#container-transfers-big {
+    width: 50%;
+}
+
+#container-transfers {
+    background-color: #003f8256;
+    min-height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.monto {
+    width: 50%;
+}
+
+#dest-transferencia {
+    font-size: 15px;
+}
+
+.warning {
+    font-size: 10px;
+}
+
+#accounts-transfers {
+    width: 10vw;
+}
+
+
+
+.crearCuenta {
+    border-radius: 15px;
+    border: none;
+}
+
+#btn-cerrar-sesion {
+    padding: 5px;
+    border-radius: 15px;
+    border: none;
+}
+
+.div-prestamos {
+    width: 50%;
+}
+
+
+.inp-tamaño{
+    width: 20vw;
+}
+
+#btn-volver-accounts{
+    width: 100%;
+    height: 100%;
+}
+
+#eliminar-tarjeta{
+    cursor: pointer;
+    user-select: none;
+}
+
+#eliminar-cuenta{
+    cursor: pointer;
+    user-select: none;
+}
+
+#tipo-cuenta{
+    background-color: rgba(255, 0, 0, 0.404);
+    border-radius: 5%;
+}
+
+#saldo-actual{
+    font-size: 0.7em;
+    font-style: italic;
+}
 
 @media only screen and (max-width: 630px) {
     .white-container {
@@ -258,8 +326,29 @@ body {
     }
     .container_accounts {
         margin-bottom: 15px;
+        margin-top: 10px;
     }
     .amount-transaction {
         margin-left: 10px;
+    }
+    #container-transfers-big {
+        width: 100vw;
+        margin-top: 20px;
+    }
+    #container-transfers {
+        min-height: 100%;
+        width: 60%;
+        border-radius: 5px;
+    }
+    #dest-transferencia {
+        text-align: center;
+    }
+    .inp-tamaño{
+        width: 60vw;
+    }
+
+    .div-solicitar-prestamo {
+        border-top: 0.1em solid black;    
+        margin-top: 10px;
     }
 }

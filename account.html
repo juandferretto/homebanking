@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="shortcut icon" href="/assets/apple-touch-icon.png" type="image/x-icon">
 </head>
 
 <body>
@@ -17,22 +18,29 @@
         <div class="header animate__animated animate__bounceInUp">
             <img class="logo" src="./assets/logo-homebanking.png" />
             <div class="align-left">
-                <span id="nombre">Melba Morel - Transacciones</span>
+                <span id="nombre" class="fst-italic">Transacciones</span>
             </div>
         </div>
         <div class="white-container d-flex flex-column animate__animated animate__bounceInUp">
-            <div v-for="transaction in client" id="transactions"
+            <div v-if="client.length > 0" v-for="transaction in client" id="transactions"
                 class="d-flex justify-content-between border-bottom mt-3">
                 <div>
                     <p id="date">{{formatDate(transaction.date)}}</p>
                     <h5 id="description">{{transaction.description}}</h5>
                     <p id="type">{{transaction.type}}</p>
                 </div>
-                <div class="d-flex align-items-center">
+                <div class="d-flex flex-column justify-content-center text-center">
                     <p v-if="transaction.type === 'DEBITO'" class="text-danger amount-transaction">
                         ${{transaction.amount}}</p>
                     <p v-else class="text-success amount-transaction">${{transaction.amount}}</p>
+                    <div id="saldo-actual">
+                        <p class="m-0">Saldo actual</p>
+                        <p class="m-0">${{transaction.amountAccount}}</p>
+                    </div>
                 </div>
+            </div>
+            <div v-else>
+                <h3 class="text-center fst-italic">No ha realizado ninguna transferencia.</h3>
             </div>
             <div class="d-flex justify-content-end mt-3">
                 <button class="btn-dark p-1">

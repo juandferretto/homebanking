@@ -10,14 +10,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="shortcut icon" href="/assets/apple-touch-icon.png" type="image/x-icon">
 </head>
 
 <body>
     <div id="app" class="d-flex flex-column justify-content-center align-items-center">
         <div class="header animate__animated animate__fadeIn">
             <img class="logo" src="./assets/logo-homebanking.png" />
-            <div class="align-left">
-                <span id="nombre">Melba Morel - Préstamos</span>
+            <div class="align-left d-flex gap-2">
+                <span id="nombre" class="fst-italic">Préstamos</span>
+                <button id="btn-cerrar-sesion" @click="cerrarSesion" class="btn-danger">Cerrar sesión</button>
             </div>
         </div>
         <div class="white-container gap-3 animate__animated animate__fadeIn">
@@ -27,17 +29,19 @@
                 <h1 class="tu-cuenta">Préstamos</h1>
                 <button class="links"><a class="text-decoration-none" href="#">Inversiones</a></button>
                 <button class="links"><a class="text-decoration-none" href="cards.html">Tarjetas</a></button>
+                <button class="links"><a class="text-decoration-none" href="transfers.html">Transferencias</a></button>
             </div>
-            <div class="container_accounts">
+            <div v-if="loans.length > 0" class="container_accounts">
                 <div v-for="loan in loans" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                     <div class="card-header">{{loan.name}}</div>
                     <div class="card-body">
                         <h5 class="card-title">${{loan.amount}}</h5>
                         <p class="card-text">Cuotas: {{loan.payments}}</p>
-                        <p>Proxima cuota: ${{(loan.amount / loan.payments).toFixed(2)}}</p>
+                        <p>Proxima cuota: ${{((loan.amount + ((20 / 100) * loan.amount)) / loan.payments).toFixed(2)}}</p>
                     </div>
                 </div>
             </div>
+            <div v-else class="d-flex align-items-center fst-italic"><h3 class="text-center">No ha solicitado ningún préstamos.</h3></div>
         </div>
     </div>
 

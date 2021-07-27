@@ -8,4 +8,4 @@ Si clickeamos en una cuenta podremos observar las transferencia que realizo el u
 Si desea entrar al homebanking, por favor dirijase al siguiente link: https://homebanking-app-mindhub.herokuapp.com/index.html
 
 # -Desarrollado con las siguientes tecnologías:
-> <p>*HTML5<br>*CSS3<br>*JavaScript<br>*BootStrap<br>*VUE3<br>JAVA<br>SpringBoot</p> 
+> <p>*HTML5<br>*CSS3<br>*JavaScript<br>*BootStrap<br>*VUE3<br>*AVA<br>*SpringBoot</p> 
